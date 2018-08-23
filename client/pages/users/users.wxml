@@ -1,0 +1,52 @@
+<!--用户头像&姓名-->
+<view class='panel'>
+  <image src='{{panel_bkground}}' class='panel-img'></image>
+  <view class='panel-overlay'>
+    <view class='avatar-wrap'>
+      <image wx:if="{{!hasUserInfo && canIUse}}" src="{{demo_avatar}}" class='avatar'> </image>
+    <block wx:else>
+      <image class="avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+    </block>
+    </view>  
+    <view class='nick'>
+      <text wx:if="{{!hasUserInfo && canIUse}}">Anonymous</text>
+      <text wx:else>{{userInfo.nickName}}</text>
+    </view>
+  </view>
+</view>
+<view class='nav-wrap'>
+  <view  data-name='history' class='{{navClass[0]}}' catchtap='changenav'>我的足迹</view>
+  <view  data-name='collection' class='{{navClass[1]}}' catchtap='changenav'>我的收藏</view>
+</view>
+<view class='tips' style='{{tipStyle}}'>{{tips}}</view>
+<!--用户过去评价-->
+<view wx:if='{{navToggle == 0}}'>
+  <view wx:if='{{commentData.length}}'>
+    <view class='rates__title'>我的足迹</view>
+    <view wx:for="{{commentData}}" wx:for-item='usr' class='comment__history' bindtouchstart="touchS"bindtouchmove="touchM"bindtouchend="touchE"data-index="{{index}}"data-nav="0"style="position:relative;{{usr.txtStyle}}"animation='{{usr.ani}}' bindlongpress='toggleDel'>
+      <view style="white-space:nowrap;" catchtap='intoStore'data-itemname='{{usr.storeid}}'>
+        <view class='rates__avatar-wrap'><image class='rates__avatar' src='{{userInfo.avatarUrl}}'></image></view>
+        <view class='rates__user'>
+          <view class='user__nick'>{{userInfo.nickName}}</view> 
+          <view class='user__info'>{{usr.score}}<text decode="{{true}}" space="{{true}}">&nbsp;</text> {{usr.date}}<text decode="{{true}}" space="{{true}}">&nbsp;</text>in<text decode="{{true}}" space="{{true}}">&nbsp;</text>{{usr.storeid}}</view>
+        </view>
+        <view class='user__content'>{{usr.content}}</view>
+      </view>
+    </view>
+  </view>
+  <view wx:else>
+  No History
+  </view>
+</view>
+<view wx:if='{{navToggle == 1}}'>
+  <view wx:for="{{collectionData}}" wx:for-item='usr' class='comment__history' style="position:relative;{{usr.txtStyle}}" bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}"data-nav="1"style="position:relative;{{usr.txtStyle}}"animation='{{usr.ani}}' bindlongpress='toggleDel'>
+    <view style="white-space:nowrap;" catchtap='intoStore'data-itemname='{{usr.storeid}}'>
+      <view class='rates__avatar-wrap'><image class='rates__avatar' src='{{userInfo.avatarUrl}}'></image></view>
+        <view class='rates__user'>
+          <view class='user__nick'>{{userInfo.nickName}}</view> 
+          <view class='user__info'>{{usr.date}}<text decode="{{true}}" space="{{true}}">&nbsp;</text>收藏<text decode="{{true}}" space="{{true}}">&nbsp;</text>{{usr.storeid}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+<view style="width:100%;padding:20rpx;font-size:0.8em;text-align:center;color:#888;">That's all...</view>

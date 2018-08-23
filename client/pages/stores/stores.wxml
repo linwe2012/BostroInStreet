@@ -1,0 +1,45 @@
+<view class="navigationBar" style="background:{{nav_bgcolor}}">
+  <!--顶部搜索栏-->
+  <view class="search-opacity">
+    <image src='../../icon/return.png' class='icon__img' bindtap='returnIndex'/>
+    <view class="weui-search-bar__form">
+      <view class="weui-search-bar__box">
+        <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+        <input type="text" class="weui-search-bar__input"  disabled='true' placeholder="搜索入口" bindtap="wxSearchTab"/>
+      </view>
+    </view>
+  </view>
+  <!--按不同要求排序-->
+  <view class='rank-wrap'>
+  <view  data-name='default' class='{{sortdefault}}' catchtap='sortStore'>默认排序</view>
+  <view  data-name='score' class='{{sortscore}}' catchtap='sortStore'>评分高低</view>
+  <view  data-name='hot' class='{{sorthot}}' catchtap='sortStore'>热度高低</view>
+  <view  data-name='distance' class='{{sortdistance}}' catchtap='sortStore'>距离远近</view>
+  </view>
+</view>
+<view style="height: 82px;width:100;"/>
+<!--canvas canvas-id="searchBgColor"></canvas-->
+<!--按类搜索结果-->
+<view wx:for="{{storesList}}" wx:for-item='store' >
+  <view class='results-stores'  catchtap='intoStore' data-itemname='{{store.storename}}'>
+    <view class='result__head'>
+      <view class='store-pic-wrap'>
+        <image src='{{store.pic}}' class='store-pic' mode='aspectFill' />
+      </view>
+      <view class='result__head-info'>
+        <view class='store-name'>{{store.storename}}</view>
+        <view class='store-score'>{{store.score}}★ <text decode="{{true}}" space="{{true}}">&nbsp;</text> ({{store.comments}} <view class='icon'><image src='../../icon/person.png' style='width:1em;height:1em;position:relative;top:2rpx;opacity:0.6;'></image></view>)</view>
+        <view wx:if='{{!store.usercomments}}' class='store-score'>您还没有在这家店留下足迹</view>
+        <view wx:else class='store-score'>您在这家店留下{{store.usercomments}}条评论</view>
+      </view>
+    </view>
+ 
+    <scroll-view scroll-x class="result__pics">
+        <view wx:for="{{store.itempics}}" class='item__img-wrap'>
+            <image class='item__img' src='{{item}}' mode='aspectFill'></image>
+        </view>
+      </scroll-view>
+      <view style='width:100%;height:25rpx;'/>
+      <view class='store__intro'>{{store.intro}}</view>
+  </view>
+</view>

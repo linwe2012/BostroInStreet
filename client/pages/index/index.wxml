@@ -1,0 +1,29 @@
+<!--顶部搜索栏-->
+<view class="weui-search-bar">
+  <view class="weui-search-bar__form">
+    <view class="weui-search-bar__box">
+      <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+      <input type="text" class="weui-search-bar__input"  disabled='true' placeholder="搜索入口" bindtap="wxSearchTab"/>
+    </view>
+  </view>
+</view>
+
+<!--index.wxml-->
+<view class="container">
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}，欢迎您！</text>
+    </block>
+  </view>
+</view>
+<!--商店分类-->
+<view class='selection'>
+ <view class='selection__item'><image src='{{icon[0].addr}}' class='icon-pic' bindtap='searchType' id='1'></image></view>
+ <view class='selection__item'><image src='{{icon[1].addr}}' class='icon-pic' bindtap='searchType' id='2'></image></view>
+ <view class='selection__item'><image src='{{icon[2].addr}}' class='icon-pic' bindtap='searchType' id='3'></image></view>
+ <view class='selection__item'><image src='{{icon[3].addr}}' class='icon-pic' bindtap='searchType' id='4'></image></view>
+ <view class='selection__item'><image src='{{icon[4].addr}}' class='icon-pic' bindtap='searchType' id='5'></image></view>
+ <view class='selection__item'><image src='{{icon[5].addr}}' class='icon-pic' bindtap='searchType' id='6'></image></view>
+</view>

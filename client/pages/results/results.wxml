@@ -1,0 +1,133 @@
+<view class="weui-search-bar msearch">
+  <image src='../../icon/return.png' class='icon__img' bindtap='returnIndex'/>
+  <view class="weui-search-bar__form">
+    <view class="weui-search-bar__box">
+      <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+      <input type="text" class="weui-search-bar__input"  disabled='true' placeholder="搜索入口" bindtap="wxSearchTab"/>
+    </view>
+  </view>
+</view>
+<view style="width:100%;height:46px;"/>
+
+<view class='pic-wrap'>
+  <image class='pic' src='{{storeData[0].pic}}' mode='aspectFill'></image>
+</view>
+
+<view class='detail'>
+    <view class="{{storenameclass}}"><view class='stonm__name'>{{storeData[0].storename}}</view>
+      <view class="score">{{storeData[0].score}}<view class='score__star'>★</view><text decode="{{true}}" space="{{true}}">&nbsp;&nbsp;&nbsp;&nbsp;</text>{{storeData[0].comments}} 个评价</view>
+      <view class='stonm__fav' bindtap='toggleColl'><image src="../../icon/fav{{favToggle?'o':''}}.png" class='stonm__fav-img'/>{{coll_txt}}</view>
+    </view>
+    <!--信息简介卡片-->
+    <view class='info-card'>
+      <view class='intro'>{{storeData[0].intro}}</view>
+      <view class='addr'>
+        <view class='addr__speci'>{{storeData[0].addr}}</view>
+        <view wx:if='{{visitTime > 3}}' class='addr__go' bindtap='findRoute' data-storename='{{storeData[0].storename}}'>GO</view>
+      </view>
+      <view wx:if='{{visitTime < 4}}' class='addr' bindtap='findRoute' data-storename='{{storeData[0].storename}}' style='text-align:center;color:#fff;background:#1a73e8;font-weight:bold;'>
+        GO
+      </view>
+    </view>
+    <!--商品展示-->
+    <view class='items'>
+      <view class='items__title'>精选</view>
+      <view class='items__title-support'>点击商品图片来查看详情</view>
+      <scroll-view scroll-x class="items__speci">
+        <view wx:for="{{storeData[1]}}" class='item'>
+          <view class='item__img-wrap' bindtap='itemtap' data-id='{{index}}'><image class='item__img' src='{{item.itempic}}' mode='aspectFill'></image></view>
+          <view class='item__name'>{{item.itemname}}</view>
+        </view>
+      </scroll-view>
+    </view>
+    <!--用户评价区 -->
+    <view wx:if="{{!hasUserInfo}}" class='review__support' style='width:100%;background:#eee;' bindtap='pullOpenid'>
+      Ooops, it seems you haven't logged in.
+      <view> Click To Retry </view>
+    </view>
+    <view wx:else class='review'>
+      <view class='review__avatar-wrap shadow'>
+        <image src="{{userInfo.avatarUrl}}" mode="cover" class='review__avatar' />
+      </view>
+      <view class='review__title'>{{reviewtitle}}</view>
+      <view class='review__content-wrap' animation="{{ani_content}}">
+        <view class='review__star-wrap'>
+          <image class='review__star' data-id='1' src="../../icon/star{{flag>=1?'o':''}}.png" bindtap='star' />
+          <image class='review__star' data-id='2' src="../../icon/star{{flag>=2?'o':''}}.png" bindtap='star' />
+          <image class='review__star' data-id='3' src="../../icon/star{{flag>=3?'o':''}}.png" bindtap='star' />
+          <image class='review__star' data-id='4' src="../../icon/star{{flag>=4?'o':''}}.png" bindtap='star' />
+          <image class='review__star' data-id='5' src="../../icon/star{{flag>=5?'o':''}}.png" bindtap='star' />
+        </view>
+        <view class='review__ipt-wrap'><input placeholder="Comments" class='review__ipt' style='border-bottom:{{reviewIptFocusBottom}};' bindfocus='reviewIptFocusFun' cursor-spacing='4' bindconfirm='reviewCnfmFun' bindblur='reviewIptBlurFun'/></view>
+        <view class='review__final'>{{finalscore}}</view>
+      </view>
+      <view class='review__pre' wx:if="{{!reviewSuportToggle}}">
+        <view>This Review will be visible to all.</view>
+        <view>You are able to delete it.</view>
+      </view>
+      <view class='review__support' wx:else animation='{{ani_topup}}'>{{reviewSupport}}</view>
+      <view class='review__buttons'>
+        <view style='display:inline-box;width:50%;height:50rpx;'><view class='review__back' style='display:{{reviewBackDisplay}};margin-left:25rpx;' bindtap='backBtnFun'>返回</view></view>
+        <view class='review__submit'><view style='color:{{submitcolor}};width:120rpx;margin-left:220rpx;text-align:right' bindtap='submitBtnFun'>{{submitBtnContent}}</view></view>
+      </view>
+      <view class='review__nav-wrap' wx:if="{{showNav}}">
+        <view animation='{{ani_nav_1}}' class='review__nav'/>
+        <view animation='{{ani_nav_2}}' class='review__nav'/>
+      </view>
+    </view>
+    <!--其他用户的评价-->
+    <view class='rates__title'>评价</view>
+    <view wx:if='{{storeData[3].length}}' style='background:#e3f2fd;width:100%;font-size:0.7em;padding-left:30rpx;padding-top:10rpx;color:#0d47a1'>◉ 您最近的几条评论</view>
+    <view class='rates' wx:for='{{storeData[3]}}' style='background:#e3f2fd'>
+      <view style='white-space: nowrap;'>
+        <view class='rates__avatar-wrap'><image class='rates__avatar' src='{{userInfo.avatarUrl}}'></image></view>
+        <view class='rates__user'>
+          <view class='user__nick' style='color:#0d47a1'>{{userInfo.nickName}}</view>
+          <view class='user__info'style='color:#004ba0'>{{item.score}} <text decode="{{true}}" space="{{true}}">&nbsp;</text> {{item.date}}</view>
+        </view>
+        <view class='user__content'style='color:#0d47a1'>{{item.content}}</view>
+      </view>
+    </view>
+    <view class='rates' wx:for='{{storeData[2]}}'>
+      <view style='white-space: nowrap;'>
+        <view class='rates__avatar-wrap'><image class='rates__avatar' src='{{item.avatar}}'></image></view>
+        <view class='rates__user'>
+          <view class='user__nick'>{{item.username}}</view>
+          <view class='user__info'>{{item.score}} <text decode="{{true}}" space="{{true}}">&nbsp;</text> {{item.date}}</view>
+        </view>
+        <!--view class='user__thumbup'><image src='../../icon/thumbup.png' id="" bindtap='thumbup'/></view-->
+        <view class='user__content'>{{item.content}}</view>
+      </view>
+    </view>
+    <view class='rates-btn' wx:if='{{storeData[2].length<storeData[0].comments}}'><view bindtap='loadMoreComments'>Load More</view></view>
+    <view class='rate-eof' wx:else>No more Comments...</view>
+</view>
+<view class='note'>
+  <view class='note__title'>Note</view>
+  <view class='note__btn' bindtap='itemtap' data-id='a'>
+    <view class='note__icon'>⚑</view> Report abuse</view>
+  <view class='note__btn'  bindtap='itemtap' data-id='b'>
+    <view class='note__icon'>☢</view> Privacy policy</view>
+  <view class='note__btn'  bindtap='itemtap' data-id='c'>
+    <view class='note__icon'>⁂</view> Register your Bistro</view>
+  <view class='note__text' bindtap='itemtap' data-id='+'>All contents are produced by user, which doesn't represent us.</view>
+</view>
+<!--Pop Up card & darkening mask-->
+<view class='mask' wx:if="{{showPopup}}" animation='{{ani_mask}}'></view>
+<view class='popup' wx:if="{{showPopup}}" catchtouchmove="preventTouchMove" bindtap='closePopup'>
+<!--保证点击阴影部分关闭卡片-->
+  <view class='info-card' syle='vertical-align:middle;opacity:0;' animation='{{ani_popup}}' catchtap='preventTouchMove'>
+    <view class='info-card__img-wrap'>
+      <image src='{{popupImg}}' style='width:100%;' mode='widthFix' />
+    </view>
+    <view class='info-card__title'>{{popupTitle}}</view>
+    
+    <view class='info-card__support'>
+      <scroll-view scroll-y style="max-height:20vh;"><text>{{popupIntro}}</text></scroll-view>
+    </view>
+    <view class='info-card__section' style='text-align:right;'>
+      <view style='position:relative;left:510rpx;width:100rpx;font-weight:bold;color:#2979ff;padding:20rpx;border-radius:2rpx;' bindtap='closePopup' hover-class='ripple'>CLOSE</view>
+    </view>
+  </view>
+</view>
+

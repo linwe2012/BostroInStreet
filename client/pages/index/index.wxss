@@ -1,0 +1,45 @@
+/**index.wxss**/
+@import "../../wxSearchView/wxSearchView.wxss";
+.container{
+  padding-top:10px;
+  padding-bottom:10px;
+  background-color:#eee;
+}
+.userinfo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: rgb(48, 45, 45);
+}
+
+.usermotto {
+  margin-top: 200px;
+}
+
+.icon-pic{
+  font-size: 30rpx;
+  text-align: center;
+  margin-top: 40rpx;
+  margin-left:40rpx;
+  height: 180rpx;
+  width:315rpx;
+}
+.selection{
+  white-space: pre-wrap;
+}
+.selection__item{
+  display: inline-block;
+  width: 50%;
+  margin-top: 20rpx; 
+  margin-bottom: 40rpx; 
+}

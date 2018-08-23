@@ -1,0 +1,66 @@
+@import "../../wxSearchView/wxSearchView.wxss";
+.reco{
+  margin-top: 50rpx;
+  margin-bottom: 50rpx;
+}
+.info-card{
+  width: 690rpx;
+  margin-left: 30rpx;
+  background: #fff;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+  border-radius: 2px;
+  color: rgba(0,0,0,.54);
+}
+.icon__img{
+  width:23px;
+  height:23px;
+  margin-right:10rpx;
+  position: relative;
+  left: -5px;
+  opacity: 0.3;
+  margin-top: 4px;
+}
+.rec__title{
+
+  color: #fff;
+
+  font-size: 1.2em;
+  padding: 20rpx;
+}
+
+.rec__title-b{
+  color: #fff;
+  padding: 10rpx;
+  padding-left: 20rpx;
+}
+
+.rec__title-b text{
+  opacity: 0.8;
+}
+
+.rec__support{
+  padding: 20rpx;
+}
+
+.rec__pics{
+  white-space: nowrap;
+}
+
+.rec__img-wrap{
+  margin: 20rpx;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  background: #eee;
+  display: inline-block;
+}
+
+.item__img{
+   border-radius: 50%;
+   width: 100rpx;
+  height: 100rpx;
+}
+.rec__addr{
+  font-size: 0.7em;
+  padding: 5rpx 20rpx 20rpx 20rpx;
+}

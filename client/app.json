@@ -1,0 +1,44 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/search/search",
+    "pages/results/results",
+    "pages/stores/stores",
+    "pages/recommendation/recommendation",
+    "pages/users/users",
+    "pages/map/map",
+    "pages/navigation_detail/navigation_detail",
+    "pages/navigation_walk/navigation_walk",
+    "pages/navigation_ride/navigation_ride"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#e8e8e8",
+    "navigationBarTitleText": "街头巷尾",
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "selectedColor": "#b99988",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "icon/index1.png",
+        "selectedIconPath": "icon/index2.png"
+      },
+      {
+        "pagePath": "pages/recommendation/recommendation",
+        "text": "推荐",
+        "iconPath": "icon/reco1.png",
+        "selectedIconPath": "icon/reco2.png"
+      },
+      {
+        "pagePath": "pages/users/users",
+        "text": "我的主页",
+        "iconPath": "icon/usr1.png",
+        "selectedIconPath": "icon/usr2.png"
+      }
+    ]
+  }  
+}

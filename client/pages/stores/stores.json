@@ -1,0 +1,9 @@
+{
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#e8e8e8",
+    "navigationBarTitleText": "街头巷尾",
+    "navigationBarTextStyle": "white",
+    "navigationStyle": "custom"
+  }
+}

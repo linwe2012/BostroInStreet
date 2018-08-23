@@ -1,0 +1,25 @@
+<view class="weui-search-bar msearch">
+<image src='../../icon/return.png' class='icon__img' bindtap='returnIndex'></image>
+  <view class="weui-search-bar__form">
+    <view class="weui-search-bar__box">
+      <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+      <input type="text" class="weui-search-bar__input"  disabled='true' placeholder="搜索入口" bindtap=""/>
+    </view>
+  </view>
+</view>
+<!--信息简介卡片-->
+<view wx:for='{{recData}}' wx:for-item='rec'>
+<view class='reco info-card' bindtap='intoStore' data-id='{{rec.storename}}'>
+      <view class='rec__title' style='background:{{rec.color_main}};'>{{rec.title}}</view>
+      <view class='rec__title-b'style=' background: {{rec.color_sub}};'>
+        <text decode="{{true}}" space="{{true}}">{{rec.date}}&nbsp;&nbsp;•&nbsp;&nbsp;{{rec.score}}★</text>
+      </view>
+      <view class='rec__support'>{{rec.intro}}</view>
+      <scroll-view scroll-x class="rec__pics">
+        <view class='rec__img-wrap' wx:for='{{rec.itempics}}'>
+          <image  class='item__img' src='{{item}}'></image>
+        </view>
+      </scroll-view>
+      <view class='rec__addr'>地址: {{rec.addr}}</view>
+</view>
+</view>
